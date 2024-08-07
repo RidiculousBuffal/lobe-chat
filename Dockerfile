@@ -115,7 +115,7 @@ AZURE_AD_TENANT_ID="52fc6378-ecb3-42d1-b528-6111ae133fc1"
 ENV S3_ACCESS_KEY_ID="AKIDhJ1qeVQcsoopsqsrmdPJCyeNC84wlhku" \
     S3_SECRET_ACCESS_KEY="AQemXC2qYCoT8sY2IMH3cxEKYdgbK0Yz" \
     NEXT_PUBLIC_S3_DOMAIN="https://hpcow-1316827225.cos.ap-shanghai.myqcloud.com" \
-    S3_ENDPOINT="cos.ap-shanghai.myqcloud.com" \
+    S3_ENDPOINT="https://cos.ap-shanghai.myqcloud.com" \
     S3_BUCKET="hpcow-1316827225"
 
 # Model Variables
