@@ -11,7 +11,7 @@ FROM base AS builder
 
 ARG USE_NPM_CN_MIRROR
 
-ENV KEY_VAULTS_SECRET="use-for-build" \
+ENV KEY_VAULTS_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
   NEXT_PUBLIC_SERVICE_MODE="server" \
   DATABASE_DRIVER="node" \
   DATABASE_URL="postgresql://root:OS5D106kWy97M28folZFG3Idc4ETVuaH@sfo1.clusters.zeabur.com:32731/zeabur"
@@ -98,9 +98,9 @@ ENV API_KEY_SELECT_MODE="" \
     FEATURE_FLAGS=""
 
 # Database
-ENV KEY_VAULTS_SECRET="" \
+ENV KEY_VAULTS_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
 DATABASE_DRIVER="node" \
-DATABASE_URL=""
+DATABASE_URL="postgresql://root:OS5D106kWy97M28folZFG3Idc4ETVuaH@sfo1.clusters.zeabur.com:32731/zeabur"
 
 # Next Auth
 ENV NEXT_AUTH_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
