@@ -105,7 +105,7 @@ DATABASE_URL="postgresql://root:OS5D106kWy97M28folZFG3Idc4ETVuaH@sfo1.clusters.z
 # Next Auth
 ENV NEXT_AUTH_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
 ACCESS_CODE="Zhougezuishuai22" \
-NEXTAUTH_URL="" \
+NEXTAUTH_URL="https://cathaybot.zeabur.com/api/auth/callback/azure-ad" \
 NEXT_AUTH_SSO_PROVIDERS="azure-ad" \
 AZURE_AD_CLIENT_ID="b315490a-0e57-4f66-b6ea-6c980bdf8907" \
 AZURE_AD_CLIENT_SECRET="Z318Q~X83TYmXEXy~OjgPGEZao5OK3qZfYshKb2X" \
