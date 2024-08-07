@@ -109,7 +109,7 @@ NEXTAUTH_URL="https://cathaybot.zeabur.com/api/auth" \
 NEXT_AUTH_SSO_PROVIDERS="auth0" \
 AUTH0_CLIENT_ID = "x2TAhrOpb9iEe7OqWQsaM9oNzZ63dNHQ" \
 AUTH0_CLIENT_SECRET = "WzsSkh26QKJj0G-or9vxvDGwHd4DjKzIXlzxpIgL6_mf8_qaopFscFXZFWzKzcjE" \
-AUTH0_ISSUER = "dev-itiifj0yxxduxhom.us.auth0.com"
+AUTH0_ISSUER = "https://dev-itiifj0yxxduxhom.us.auth0.com"
 
 # S3
 ENV S3_ACCESS_KEY_ID="AKIDhJ1qeVQcsoopsqsrmdPJCyeNC84wlhku" \
