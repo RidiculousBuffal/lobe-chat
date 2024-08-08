@@ -88,7 +88,7 @@ FROM base
 COPY --from=app --chown=nextjs:nodejs /app /app
 
 ENV NODE_ENV="production"
-ENV ACCESS_CODE="Zhougezuishuai22"
+
 # set hostname to localhost
 ENV HOSTNAME="0.0.0.0" \
     PORT="3210"
@@ -106,10 +106,16 @@ DATABASE_URL="postgresql://root:OS5D106kWy97M28folZFG3Idc4ETVuaH@sfo1.clusters.z
 ENV NEXT_AUTH_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
 ACCESS_CODE="Zhougezuishuai22" \
 NEXTAUTH_URL="https://cathaybot.zeabur.app/api/auth" \
-NEXT_AUTH_SSO_PROVIDERS="azure-ad" \
+NEXT_AUTH_SSO_PROVIDERS="azure-ad,auth0" \
 AZURE_AD_CLIENT_ID="b315490a-0e57-4f66-b6ea-6c980bdf8907" \
 AZURE_AD_CLIENT_SECRET="Z318Q~X83TYmXEXy~OjgPGEZao5OK3qZfYshKb2X" \
 AZURE_AD_TENANT_ID="52fc6378-ecb3-42d1-b528-6111ae133fc1"
+AUTH0_CLIENT_ID="x2TAhrOpb9iEe7OqWQsaM9oNzZ63dNHQ" \
+AUTH0_CLIENT_SECRET="WzsSkh26QKJj0G-or9vxvDGwHd4DjKzIXlzxpIgL6_mf8_qaopFscFXZFWzKzcjE" \
+AUTH0_ISSUER="https://dev-itiifj0yxxduxhom.us.auth0.com"
+
+
+
 
 # S3
 ENV S3_ACCESS_KEY_ID="AKIDhJ1qeVQcsoopsqsrmdPJCyeNC84wlhku" \
