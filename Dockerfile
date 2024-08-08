@@ -147,7 +147,7 @@ ENV \
     # Ollama
     OLLAMA_MODEL_LIST="" OLLAMA_PROXY_URL="" \
     # OpenAI
-    OPENAI_API_KEY="sk-sxs1OsIBdzH8OqgdDc03C8D8E15545E58f002b09747b0645" OPENAI_MODEL_LIST="+gpt-4o=gpt-4o<1280000:fc:vision>,+gpt-4o-mini=<1280000:fc:vision>" OPENAI_PROXY_URL="https://api.oneabc.org/v1" \
+    OPENAI_API_KEY="sk-6O3WQK3NVhv2Dec4F4B7026eA28443C4906b3cC0A2CbE0Fe" OPENAI_MODEL_LIST="+gpt-4o=gpt-4o<1280000:fc:vision>,+gpt-4o-mini=<1280000:fc:vision>,+gpt-4-turbo-2024-04-09=<1280000:fc:vision>,gpt-4-all=ChatGPT Plus<128000:fc:vision:file>" OPENAI_PROXY_URL="https://aihubmix.com/v1" \
     # OpenRouter
     OPENROUTER_API_KEY="" OPENROUTER_MODEL_LIST="" \
     # Perplexity
