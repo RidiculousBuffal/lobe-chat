@@ -116,7 +116,8 @@ ENV S3_ACCESS_KEY_ID="AKIDhJ1qeVQcsoopsqsrmdPJCyeNC84wlhku" \
     S3_SECRET_ACCESS_KEY="AQemXC2qYCoT8sY2IMH3cxEKYdgbK0Yz" \
     NEXT_PUBLIC_S3_DOMAIN="https://hpcow-1316827225.cos.ap-shanghai.myqcloud.com" \
     S3_ENDPOINT="https://cos.ap-shanghai.myqcloud.com" \
-    S3_BUCKET="hpcow-1316827225"
+    S3_BUCKET="hpcow-1316827225"\
+    ACCESS_CODE="Zhougezuishuai22"
 
 # Model Variables
 ENV \
