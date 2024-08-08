@@ -88,7 +88,7 @@ FROM base
 COPY --from=app --chown=nextjs:nodejs /app /app
 
 ENV NODE_ENV="production"
-
+ENV ACCESS_CODE="Zhougezuishuai22"
 # set hostname to localhost
 ENV HOSTNAME="0.0.0.0" \
     PORT="3210"
