@@ -14,7 +14,7 @@ ARG USE_NPM_CN_MIRROR
 ENV KEY_VAULTS_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
   NEXT_PUBLIC_SERVICE_MODE="server" \
   DATABASE_DRIVER="node" \
-  DATABASE_URL="postgres://citus:38NutRoad@c-test123.ssey2uizc35tev.postgres.cosmos.azure.com:5432/testPOC"
+  DATABASE_URL="postgres://citus:38NutRoad@c-test123.ssey2uizc35tev.postgres.cosmos.azure.com:5432/testPOC?sslmode=require"
 
 # Sentry
 ENV NEXT_PUBLIC_SENTRY_DSN="" \
@@ -100,7 +100,7 @@ ENV API_KEY_SELECT_MODE="" \
 # Database
 ENV KEY_VAULTS_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
 DATABASE_DRIVER="node" \
-DATABASE_URL="postgres://citus:38NutRoad@c-test123.ssey2uizc35tev.postgres.cosmos.azure.com:5432/testPOC"
+DATABASE_URL="postgres://citus:38NutRoad@c-test123.ssey2uizc35tev.postgres.cosmos.azure.com:5432/testPOC?sslmode=require"
 
 # Next Auth
 ENV NEXT_AUTH_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
