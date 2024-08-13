@@ -10,7 +10,7 @@ RUN \
 FROM base AS builder
 
 ARG USE_NPM_CN_MIRROR
-
+ARG NEXT_PUBLIC_S3_DOMAIN="https://hpcow-1316827225.cos.ap-shanghai.myqcloud.com"
 ENV KEY_VAULTS_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
   NEXT_PUBLIC_SERVICE_MODE="server" \
   DATABASE_DRIVER="node" \
@@ -120,7 +120,7 @@ AUTH0_ISSUER="https://dev-itiifj0yxxduxhom.us.auth0.com"
 # S3
 ENV S3_ACCESS_KEY_ID="AKIDhJ1qeVQcsoopsqsrmdPJCyeNC84wlhku" \
     S3_SECRET_ACCESS_KEY="AQemXC2qYCoT8sY2IMH3cxEKYdgbK0Yz" \
-    NEXT_PUBLIC_S3_DOMAIN="https://hpcow-1316827225.cos.ap-shanghai.myqcloud.com" \
+    NEXT_PUBLIC_S3_DOMAIN=${NEXT_PUBLIC_S3_DOMAIN} \
     S3_ENDPOINT="https://cos.ap-shanghai.myqcloud.com" \
     S3_BUCKET="hpcow-1316827225"\
     ACCESS_CODE="Zhougezuishuai22"
