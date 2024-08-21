@@ -5,6 +5,7 @@ import {
   Azure,
   Baichuan,
   Bedrock,
+  Copilot,
   DeepSeek,
   Google,
   Groq,
@@ -138,7 +139,9 @@ const ModelProviderIcon = memo<ModelProviderIconProps>(({ provider }) => {
     case ModelProvider.SiliconCloud: {
       return <SiliconCloud size={20} />;
     }
-
+    case ModelProvider.Bingai: {
+      return <Copilot size={20} />;
+    }
     default: {
       return null;
     }

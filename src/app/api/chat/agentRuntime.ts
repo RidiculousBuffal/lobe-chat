@@ -208,6 +208,12 @@ const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
 
       return { apiKey, baseURL };
     }
+    case ModelProvider.Bingai: {
+      const { BINGAI_API_KEY } = getLLMConfig();
+      const apiKey = apiKeyManager.pick(payload?.apiKey || BINGAI_API_KEY);
+
+      return { apiKey };
+    }
   }
 };
 

@@ -57,6 +57,7 @@ export const getServerGlobalConfig = () => {
     ENABLED_ZEROONE,
     ENABLED_TOGETHERAI,
     TOGETHERAI_MODEL_LIST,
+    ENABLED_BINGAI,
   } = getLLMConfig();
 
   const config: GlobalServerConfig = {
@@ -82,6 +83,9 @@ export const getServerGlobalConfig = () => {
       },
       baichuan: { enabled: ENABLED_BAICHUAN },
       bedrock: { enabled: ENABLED_AWS_BEDROCK },
+      bingai: {
+        enabled: ENABLED_BINGAI,
+      },
       deepseek: { enabled: ENABLED_DEEPSEEK },
       google: { enabled: ENABLED_GOOGLE },
       groq: { enabled: ENABLED_GROQ },
@@ -105,7 +109,6 @@ export const getServerGlobalConfig = () => {
           modelString: OPENAI_MODEL_LIST,
         }),
       },
-
       openrouter: {
         enabled: ENABLED_OPENROUTER,
         enabledModels: extractEnabledModels(OPENROUTER_MODEL_LIST),

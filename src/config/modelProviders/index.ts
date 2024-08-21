@@ -5,6 +5,7 @@ import AnthropicProvider from './anthropic';
 import AzureProvider from './azure';
 import BaichuanProvider from './baichuan';
 import BedrockProvider from './bedrock';
+import BingaiProvider from './bingai';
 import DeepSeekProvider from './deepseek';
 import GoogleProvider from './google';
 import GroqProvider from './groq';
@@ -47,6 +48,7 @@ export const LOBE_DEFAULT_MODEL_LIST: ChatModelCard[] = [
   TaichuProvider.chatModels,
   Ai360Provider.chatModels,
   SiliconCloudProvider.chatModels,
+  BingaiProvider.chatModels,
 ].flat();
 
 export const DEFAULT_MODEL_PROVIDER_LIST = [
@@ -73,6 +75,7 @@ export const DEFAULT_MODEL_PROVIDER_LIST = [
   TaichuProvider,
   Ai360Provider,
   SiliconCloudProvider,
+  BingaiProvider,
 ];
 
 export const filterEnabledModels = (provider: ModelProviderCard) => {
@@ -89,6 +92,7 @@ export { default as AnthropicProviderCard } from './anthropic';
 export { default as AzureProviderCard } from './azure';
 export { default as BaichuanProviderCard } from './baichuan';
 export { default as BedrockProviderCard } from './bedrock';
+export { default as BingaiProviderCard } from './bingai';
 export { default as DeepSeekProviderCard } from './deepseek';
 export { default as GoogleProviderCard } from './google';
 export { default as GroqProviderCard } from './groq';

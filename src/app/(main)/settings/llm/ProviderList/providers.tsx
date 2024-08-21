@@ -4,6 +4,7 @@ import {
   Anthropic,
   Baichuan,
   Claude,
+  Copilot,
   DeepSeek,
   Gemini,
   Google,
@@ -31,6 +32,7 @@ import {
   Ai360ProviderCard,
   AnthropicProviderCard,
   BaichuanProviderCard,
+  BingaiProviderCard,
   DeepSeekProviderCard,
   GoogleProviderCard,
   GroqProviderCard,
@@ -198,12 +200,16 @@ export const useProviderList = (): ProviderItem[] => {
       {
         ...Ai360ProviderCard,
         docUrl: urlJoin(BASE_DOC_URL, 'ai360'),
-        title: <Ai360.Combine size={ 20 } type={ 'color' } />,
+        title: <Ai360.Combine size={20} type={'color'} />,
       },
       {
         ...SiliconCloudProviderCard,
         docUrl: urlJoin(BASE_DOC_URL, 'siliconcloud'),
         title: <SiliconCloud.Combine size={20} type={'color'} />,
+      },
+      {
+        ...BingaiProviderCard,
+        title: <Copilot.Combine size={20} type={'color'} />,
       },
     ],
     [azureProvider, ollamaProvider, ollamaProvider, bedrockProvider],

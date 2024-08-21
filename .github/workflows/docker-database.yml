@@ -37,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile.database  # 指定使用 Dockerfile.database 文件
+          file: ./Dockerfile.database.database.1  # 指定使用 Dockerfile.database.database.1 文件
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}

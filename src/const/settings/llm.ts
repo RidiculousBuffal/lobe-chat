@@ -3,6 +3,7 @@ import {
   AnthropicProviderCard,
   BaichuanProviderCard,
   BedrockProviderCard,
+  BingaiProviderCard,
   DeepSeekProviderCard,
   GoogleProviderCard,
   GroqProviderCard,
@@ -45,6 +46,10 @@ export const DEFAULT_LLM_CONFIG: UserModelProviderConfig = {
   bedrock: {
     enabled: false,
     enabledModels: filterEnabledModels(BedrockProviderCard),
+  },
+  bingai: {
+    enabled: false,
+    enabledModels: filterEnabledModels(BingaiProviderCard),
   },
   deepseek: {
     enabled: false,
