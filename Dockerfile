@@ -1,20 +1,32 @@
 ## Base image for all the stages
 FROM node:20-alpine AS base
 
+ARG USE_CN_MIRROR
+ARG NEXT_PUBLIC_S3_DOMAIN="https://hpcow-1316827225.cos.ap-shanghai.myqcloud.com"
 RUN \
+    # If you want to build docker in China, build with --build-arg USE_CN_MIRROR=true
+    if [ "${USE_CN_MIRROR:-false}" = "true" ]; then \
+        sed -i "s/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g" "/etc/apk/repositories"; \
+    fi \
+    # Add required package & update base package
+    && apk update \
+    && apk add --no-cache bind-tools proxychains-ng \
+    && apk upgrade --no-cache \
     # Add user nextjs to run the app
-    addgroup --system --gid 1001 nodejs \
-    && adduser --system --uid 1001 nextjs
+    && addgroup --system --gid 1001 nodejs \
+    && adduser --system --uid 1001 nextjs \
+    && chown -R nextjs:nodejs "/etc/proxychains" \
+    && rm -rf /tmp/* /var/cache/apk/*
 
 ## Builder image, install all the dependencies and build the app
 FROM base AS builder
 
-ARG USE_NPM_CN_MIRROR
-ARG NEXT_PUBLIC_S3_DOMAIN="https://hpcow-1316827225.cos.ap-shanghai.myqcloud.com"
-ENV KEY_VAULTS_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
-  NEXT_PUBLIC_SERVICE_MODE="server" \
-  DATABASE_DRIVER="node" \
-  DATABASE_URL="postgres://citus:38NutRoad@c-test123.ssey2uizc35tev.postgres.cosmos.azure.com:5432/testPOC?sslmode=require"
+ARG USE_CN_MIRROR
+
+ENV NEXT_PUBLIC_SERVICE_MODE="server" \
+    DATABASE_DRIVER="node" \
+    DATABASE_URL="postgresql://root:nBv2W84zOiw1p7AXoLyS5lDH0x39chY6@sfo1.clusters.zeabur.com:32198/zeabur" \
+    KEY_VAULTS_SECRET="use-for-build"
 
 # Sentry
 ENV NEXT_PUBLIC_SENTRY_DSN="" \
@@ -40,8 +52,8 @@ COPY package.json ./
 COPY .npmrc ./
 
 RUN \
-    # If you want to build docker in China, build with --build-arg USE_NPM_CN_MIRROR=true
-    if [ "${USE_NPM_CN_MIRROR:-false}" = "true" ]; then \
+    # If you want to build docker in China, build with --build-arg USE_CN_MIRROR=true
+    if [ "${USE_CN_MIRROR:-false}" = "true" ]; then \
         export SENTRYCLI_CDNURL="https://npmmirror.com/mirrors/sentry-cli"; \
         npm config set registry "https://registry.npmmirror.com/"; \
     fi \
@@ -80,6 +92,7 @@ COPY --from=builder /deps/node_modules/drizzle-orm /app/node_modules/drizzle-orm
 # Copy database migrations
 COPY --from=builder /app/src/database/server/migrations /app/migrations
 COPY --from=builder /app/scripts/migrateServerDB/docker.cjs /app/docker.cjs
+COPY --from=builder /app/scripts/migrateServerDB/errorHint.js /app/errorHint.js
 
 ## Production image, copy all the files and run next
 FROM base
@@ -94,13 +107,18 @@ ENV HOSTNAME="0.0.0.0" \
     PORT="3210"
 
 # General Variables
-ENV API_KEY_SELECT_MODE="" \
-    FEATURE_FLAGS=""
+ENV ACCESS_CODE="Cathay123456" \
+    APP_URL="https://cathaybot.zeabur.app" \
+    API_KEY_SELECT_MODE="" \
+    DEFAULT_AGENT_CONFIG="" \
+    SYSTEM_AGENT="" \
+    FEATURE_FLAGS="" \
+    PROXY_URL=""
 
 # Database
 ENV KEY_VAULTS_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
-DATABASE_DRIVER="node" \
-DATABASE_URL="postgres://citus:38NutRoad@c-test123.ssey2uizc35tev.postgres.cosmos.azure.com:5432/testPOC?sslmode=require"
+    DATABASE_DRIVER="node" \
+    DATABASE_URL="postgresql://root:nBv2W84zOiw1p7AXoLyS5lDH0x39chY6@sfo1.clusters.zeabur.com:32198/zeabur"
 
 # Next Auth
 ENV NEXT_AUTH_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
@@ -113,9 +131,6 @@ AZURE_AD_TENANT_ID="52fc6378-ecb3-42d1-b528-6111ae133fc1" \
 AUTH0_CLIENT_ID="x2TAhrOpb9iEe7OqWQsaM9oNzZ63dNHQ" \
 AUTH0_CLIENT_SECRET="WzsSkh26QKJj0G-or9vxvDGwHd4DjKzIXlzxpIgL6_mf8_qaopFscFXZFWzKzcjE" \
 AUTH0_ISSUER="https://dev-itiifj0yxxduxhom.us.auth0.com"
-
-
-
 
 # S3
 ENV S3_ACCESS_KEY_ID="AKIDhJ1qeVQcsoopsqsrmdPJCyeNC84wlhku" \
@@ -178,5 +193,38 @@ USER nextjs
 
 EXPOSE 3210/tcp
 
-# run migration , then run app
-CMD ["sh", "-c", "node /app/docker.cjs && node /app/server.js"]
+CMD \
+    if [ -n "$PROXY_URL" ]; then \
+        # Set regex for IPv4
+        IP_REGEX="^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$"; \
+        # Set proxychains command
+        PROXYCHAINS="proxychains -q"; \
+        # Parse the proxy URL
+        host_with_port="${PROXY_URL#*//}"; \
+        host="${host_with_port%%:*}"; \
+        port="${PROXY_URL##*:}"; \
+        protocol="${PROXY_URL%%://*}"; \
+        # Resolve to IP address if the host is a domain
+        if ! [[ "$host" =~ "$IP_REGEX" ]]; then \
+            nslookup=$(nslookup -q="A" "$host" | tail -n +3 | grep 'Address:'); \
+            if [ -n "$nslookup" ]; then \
+                host=$(echo "$nslookup" | tail -n 1 | awk '{print $2}'); \
+            fi; \
+        fi; \
+        # Generate proxychains configuration file
+        printf "%s\n" \
+            'localnet 127.0.0.0/255.0.0.0' \
+            'localnet ::1/128' \
+            'proxy_dns' \
+            'remote_dns_subnet 224' \
+            'strict_chain' \
+            'tcp_connect_time_out 8000' \
+            'tcp_read_time_out 15000' \
+            '[ProxyList]' \
+            "$protocol $host $port" \
+        > "/etc/proxychains/proxychains.conf"; \
+    fi; \
+    # Run migration
+    node "/app/docker.cjs"; \
+    # Run the server
+    ${PROXYCHAINS} node "/app/server.js";
