@@ -129,7 +129,8 @@ AZURE_AD_CLIENT_SECRET="Z318Q~X83TYmXEXy~OjgPGEZao5OK3qZfYshKb2X" \
 AZURE_AD_TENANT_ID="52fc6378-ecb3-42d1-b528-6111ae133fc1" \
 AUTH0_CLIENT_ID="x2TAhrOpb9iEe7OqWQsaM9oNzZ63dNHQ" \
 AUTH0_CLIENT_SECRET="WzsSkh26QKJj0G-or9vxvDGwHd4DjKzIXlzxpIgL6_mf8_qaopFscFXZFWzKzcjE" \
-AUTH0_ISSUER="https://dev-itiifj0yxxduxhom.us.auth0.com"
+AUTH0_ISSUER="https://dev-itiifj0yxxduxhom.us.auth0.com"\
+ACCESS_CODE="Cathay123456"
 
 # S3
 ENV S3_ACCESS_KEY_ID="AKIDhJ1qeVQcsoopsqsrmdPJCyeNC84wlhku" \
@@ -137,6 +138,7 @@ ENV S3_ACCESS_KEY_ID="AKIDhJ1qeVQcsoopsqsrmdPJCyeNC84wlhku" \
     NEXT_PUBLIC_S3_DOMAIN=${NEXT_PUBLIC_S3_DOMAIN} \
     S3_ENDPOINT="https://cos.ap-shanghai.myqcloud.com" \
     S3_BUCKET="hpcow-1316827225"\
+    ACCESS_CODE="Cathay123456"
 
 # Model Variables
 ENV \
