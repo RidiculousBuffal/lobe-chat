@@ -1,7 +1,7 @@
 'use client';
 
 import { ChatHeader } from '@lobehub/ui';
-import { LobeChat } from '@lobehub/ui/brand';
+// import { LobeChat } from '@lobehub/ui/brand';
 import { createStyles } from 'antd-style';
 import { memo } from 'react';
 
@@ -15,11 +15,11 @@ export const useStyles = createStyles(({ css, token }) => ({
 }));
 
 const Header = memo(() => {
-  const { styles } = useStyles();
+  // const { styles } = useStyles();
 
   return (
     <ChatHeader
-      left={<LobeChat className={styles.logo} extra={'Discover'} size={36} type={'text'} />}
+      left={<h2 style={{ fontWeight: '800' }}>Cathay Bot</h2>}
       right={<ShareAgentButton />}
     />
   );

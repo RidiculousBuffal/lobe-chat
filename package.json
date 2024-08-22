@@ -288,5 +288,6 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
-  }
+  },
+  "cathayhomepage": "https://www.cathaycapital.com/"
 }
