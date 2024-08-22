@@ -80,7 +80,7 @@ export const DEFAULT_LLM_CONFIG: UserModelProviderConfig = {
     enabledModels: filterEnabledModels(NovitaProviderCard),
   },
   ollama: {
-    enabled: true,
+    enabled: false,
     enabledModels: filterEnabledModels(OllamaProviderCard),
     fetchOnClient: true,
   },

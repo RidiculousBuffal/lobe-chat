@@ -95,6 +95,7 @@ export const getLLMConfig = () => {
 
       ENABLED_BINGAI: z.boolean(),
       BINGAI_API_KEY: z.string().optional(),
+      BINGAI_PROXY_URL: z.string().optional(),
     },
     runtimeEnv: {
       API_KEY_SELECT_MODE: process.env.API_KEY_SELECT_MODE,
@@ -187,6 +188,7 @@ export const getLLMConfig = () => {
 
       ENABLED_BINGAI: !!process.env.BINGAI_API_KEY,
       BINGAI_API_KEY: process.env.BINGAI_API_KEY,
+      BINGAI_PROXY_URL: process.env.BINGAI_PROXY_URL,
     },
   });
 };

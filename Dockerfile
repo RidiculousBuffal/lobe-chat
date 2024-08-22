@@ -186,7 +186,8 @@ ENV \
     ZEROONE_API_KEY="" \
     # Zhipu
     ZHIPU_API_KEY="" \
-    BINGAI_API_KEY="sk-sxs1OsIBdzH8OqgdDc03C8D8E15545E58f002b09747b0645"
+    #Bingai
+    BINGAI_API_KEY="sk-sxs1OsIBdzH8OqgdDc03C8D8E15545E58f002b09747b0645" BINGAI_PROXY_URL="https://api.oneabc.org/v1"
 
 USER nextjs
 

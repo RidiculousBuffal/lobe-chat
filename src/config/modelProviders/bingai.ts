@@ -24,7 +24,7 @@ const BingAI: ModelProviderCard = {
       tokens: 128_000,
     },
     {
-      description: '更富有创造力的bingAI',
+      description: 'gpt联网全能版本',
       enabled: true,
       functionCall: false,
       id: 'net-gpt-4-all',
@@ -32,7 +32,7 @@ const BingAI: ModelProviderCard = {
     },
   ],
   checkModel: 'bing-Creative',
-  id: 'bingAI',
+  id: 'BingAI',
   modelList: { showModelFetcher: true },
   name: 'BingAI',
 };
