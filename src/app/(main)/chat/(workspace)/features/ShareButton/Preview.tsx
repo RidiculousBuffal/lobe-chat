@@ -63,7 +63,7 @@ const Preview = memo<FieldType & { title?: string }>(
             {withFooter ? (
               <Flexbox align={'center'} className={styles.footer} gap={4}>
                 {/*<LobeChat type={'combine'} />*/}
-                <h2 style={{ fontWeight: '800' }}>Cathay Bot</h2>
+                <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Cathay Bot</h2>
                 <div className={styles.url}>{pkg.cathayhomepage}</div>
               </Flexbox>
             ) : (

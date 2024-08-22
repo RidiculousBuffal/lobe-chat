@@ -14,10 +14,10 @@ const FullscreenLoading = memo<{ title?: string }>(({ title }) => {
         {/*<LobeChat size={48} type={'combine'} />*/}
         <Image
           alt="Cathay Logo"
-          height={24}
+          height={72}
           // layout="responsive" // 适应容器尺寸
           src={logoUrl}
-          width={40} // 动态计算宽度
+          width={120} // 动态计算宽度
         />
         <Center gap={16} horizontal>
           <Icon icon={Loader2} spin />
