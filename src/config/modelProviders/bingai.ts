@@ -32,8 +32,11 @@ const BingAI: ModelProviderCard = {
     },
   ],
   checkModel: 'bing-Creative',
-  id: 'BingAI',
+  id: 'bingai',
   modelList: { showModelFetcher: true },
   name: 'BingAI',
+  proxyUrl: {
+    placeholder: 'https://api.oneabc.org/v1',
+  },
 };
 export default BingAI;
