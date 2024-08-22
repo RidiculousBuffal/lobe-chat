@@ -140,6 +140,13 @@ ENV S3_ACCESS_KEY_ID="AKIDhJ1qeVQcsoopsqsrmdPJCyeNC84wlhku" \
     S3_BUCKET="hpcow-1316827225" \
     ACCESS_CODE="Cathay123456"
 
+
+# unstructured IO
+
+ENV  UNSTRUCTURED_API_KEY="cHSLrbZzLKOihkgi4DUvsDIBsrsL0F" \
+     UNSTRUCTURED_SERVER_URL="https://api.unstructuredapp.io/general/v0/general"
+
+
 # Model Variables
 ENV \
     # Ai360
