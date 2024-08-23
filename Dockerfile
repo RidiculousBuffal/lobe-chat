@@ -138,7 +138,8 @@ ENV S3_ACCESS_KEY_ID="AKIDhJ1qeVQcsoopsqsrmdPJCyeNC84wlhku" \
     NEXT_PUBLIC_S3_DOMAIN=${NEXT_PUBLIC_S3_DOMAIN} \
     S3_ENDPOINT="https://cos.ap-shanghai.myqcloud.com" \
     S3_BUCKET="hpcow-1316827225" \
-    ACCESS_CODE="Cathay123456"
+    ACCESS_CODE="Cathay123456" \
+    S3_PUBLIC_DOMAIN=${NEXT_PUBLIC_S3_DOMAIN}
 
 
 # unstructured IO
