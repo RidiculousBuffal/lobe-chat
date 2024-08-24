@@ -1,6 +1,5 @@
 ## Base image for all the stages
 FROM node:20-alpine AS base
-
 ARG USE_CN_MIRROR
 ARG NEXT_PUBLIC_S3_DOMAIN="https://hpcow-1316827225.cos.ap-shanghai.myqcloud.com"
 RUN \
@@ -236,5 +235,7 @@ CMD \
     fi; \
     # Run migration
     node "/app/docker.cjs"; \
-    # Run the server
-    ${PROXYCHAINS} node "/app/server.js";
+    if [ "$?" -eq "0" ]; then \
+      # Run the server
+      ${PROXYCHAINS} node "/app/server.js"; \
+    fi;
