@@ -24,10 +24,17 @@ const BingAI: ModelProviderCard = {
       tokens: 128_000,
     },
     {
-      description: 'gpt联网全能版本',
+      description: 'gpt4联网全能版本',
       enabled: true,
       functionCall: false,
       id: 'net-gpt-4-all',
+      tokens: 128_000,
+    },
+    {
+      description: 'gpt4o联网全能版本',
+      enabled: true,
+      functionCall: false,
+      id: 'gpt-4o-all',
       tokens: 128_000,
     },
   ],
