@@ -50,6 +50,7 @@ const ModelIcon = memo<ModelProviderIconProps>(({ model: originModel, size = 12 
   const model = originModel.toLowerCase();
 
   // currently supported models, maybe not in its own provider
+  if (model.includes('text-embedding-')) return <OpenAI.Avatar size={size} />;
   if (model.includes('gpt-3')) return <OpenAI.Avatar size={size} type={'gpt3'} />;
   if (model.includes('gpt-4')) return <OpenAI.Avatar size={size} type={'gpt4'} />;
   if (model.includes('glm-') || model.includes('chatglm')) return <ChatGLM.Avatar size={size} />;
