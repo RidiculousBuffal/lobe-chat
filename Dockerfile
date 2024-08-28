@@ -1,6 +1,6 @@
 ## Base image for all the stages
 FROM node:20-alpine AS base
-
+ARG APP_URL="https://cathaybot.zeabur.app"
 ARG USE_CN_MIRROR
 ARG NEXT_PUBLIC_S3_DOMAIN="https://hpcow-1316827225.cos.ap-shanghai.myqcloud.com"
 RUN \
@@ -24,6 +24,7 @@ FROM base AS builder
 ARG USE_CN_MIRROR
 
 ENV NEXT_PUBLIC_SERVICE_MODE="server" \
+    APP_URL=${APP_URL} \
     DATABASE_DRIVER="node" \
     DATABASE_URL="postgresql://root:nBv2W84zOiw1p7AXoLyS5lDH0x39chY6@sfo1.clusters.zeabur.com:32198/zeabur" \
     KEY_VAULTS_SECRET="use-for-build"
@@ -108,7 +109,7 @@ ENV HOSTNAME="0.0.0.0" \
 
 # General Variables
 ENV ACCESS_CODE="Cathay123456" \
-    APP_URL="https://cathaybot.zeabur.app" \
+    APP_URL=${APP_URL} \
     API_KEY_SELECT_MODE="" \
     DEFAULT_AGENT_CONFIG="" \
     SYSTEM_AGENT="" \
@@ -236,5 +237,7 @@ CMD \
     fi; \
     # Run migration
     node "/app/docker.cjs"; \
-    # Run the server
-    ${PROXYCHAINS} node "/app/server.js";
+    if [ "$?" -eq "0" ]; then \
+      # Run the server
+      ${PROXYCHAINS} node "/app/server.js"; \
+    fi;
