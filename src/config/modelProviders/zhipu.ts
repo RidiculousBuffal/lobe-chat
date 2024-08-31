@@ -6,14 +6,6 @@ import { ModelProviderCard } from '@/types/llm';
 const ZhiPu: ModelProviderCard = {
   chatModels: [
     {
-      description: '超长输入：专为处理超长文本和记忆型任务设计',
-      displayName: 'GLM-4-Long',
-      enabled: true,
-      functionCall: true,
-      id: 'glm-4-long',
-      tokens: 1_024_000,
-    },
-    {
       description:
         'GLM-4-AllTools 是专门为支持智能体和相关任务而进一步优化的模型版本。它能够自主理解用户的意图，规划复杂的指令，并能够调用一个或多个工具（例如网络浏览器、代码解释器和文本生图像）以完成复杂的任务。',
       displayName: 'GLM-4-AllTools',
@@ -61,6 +53,14 @@ const ZhiPu: ModelProviderCard = {
       tokens: 8192,
     },
     {
+      description: '超长输入：专为处理超长文本和记忆型任务设计',
+      displayName: 'GLM-4-Long',
+      enabled: true,
+      functionCall: true,
+      id: 'glm-4-long',
+      tokens: 1_024_000,
+    },
+    {
       description: '适用简单任务，速度最快，价格最实惠的版本',
       displayName: 'GLM-4-Flash',
       enabled: true,
@@ -69,8 +69,7 @@ const ZhiPu: ModelProviderCard = {
       tokens: 128_000,
     },
     {
-      description:
-        '视频和图像理解：具备视频内容和多图片的理解能力',
+      description: '视频和图像理解：具备视频内容和多图片的理解能力',
       displayName: 'GLM-4V-Plus',
       enabled: true,
       id: 'glm-4v-plus',
@@ -78,8 +77,7 @@ const ZhiPu: ModelProviderCard = {
       vision: true,
     },
     {
-      description:
-        '图像理解：具备图像理解能力和推理能力',
+      description: '图像理解：具备图像理解能力和推理能力',
       displayName: 'GLM-4V',
       enabled: true,
       id: 'glm-4v',

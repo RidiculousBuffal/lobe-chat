@@ -214,6 +214,13 @@ const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
       const baseURL = payload?.endpoint || BINGAI_PROXY_URL;
       return { apiKey, baseURL };
     }
+    case ModelProvider.Upstage: {
+      const { UPSTAGE_API_KEY } = getLLMConfig();
+
+      const apiKey = apiKeyManager.pick(payload?.apiKey || UPSTAGE_API_KEY);
+
+      return { apiKey };
+    }
   }
 };
 
