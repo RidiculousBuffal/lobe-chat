@@ -156,7 +156,7 @@ ENV \
     # Anthropic
     ANTHROPIC_API_KEY="" ANTHROPIC_PROXY_URL="" \
     # Amazon Bedrock
-    AWS_ACCESS_KEY_ID="" AWS_SECRET_ACCESS_KEY="" AWS_REGION="" \
+    AWS_ACCESS_KEY_ID="" AWS_SECRET_ACCESS_KEY="" AWS_REGION="" AWS_BEDROCK_MODEL_LIST="" \
     # Azure OpenAI
     AZURE_API_KEY="876571fe014c4230947dfb743314ee8e" AZURE_API_VERSION="2024-05-01-preview" AZURE_ENDPOINT="https://cathaywestus.openai.azure.com" AZURE_MODEL_LIST="gpt-35-turbo->gpt-35-turbo=gpt-35-turbo" \
     # Baichuan
