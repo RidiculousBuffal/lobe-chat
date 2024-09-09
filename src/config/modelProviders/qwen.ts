@@ -79,7 +79,7 @@ const Qwen: ModelProviderCard = {
     },
     {
       description: '通义千问2对外开源的57B规模14B激活参数的MOE模型',
-      displayName: 'Qwen2 57B-A14B MoE',
+      displayName: 'Qwen2 57B A14B MoE',
       id: 'qwen2-57b-a14b-instruct',
       tokens: 65_536, // https://huggingface.co/Qwen/Qwen2-57B-A14B-Instruct
     },
