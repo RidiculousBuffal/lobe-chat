@@ -5,6 +5,7 @@ import { ChatHeader } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { memo } from 'react';
 
+// import { ProductLogo } from '@/components/Branding';
 import ShareAgentButton from '../../features/ShareAgentButton';
 
 export const useStyles = createStyles(({ css, token }) => ({
