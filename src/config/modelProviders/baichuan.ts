@@ -11,6 +11,11 @@ const Baichuan: ModelProviderCard = {
       functionCall: true,
       id: 'Baichuan4',
       maxOutput: 4096,
+      pricing: {
+        currency: 'CNY',
+        input: 100,
+        output: 100,
+      },
       tokens: 32_768,
     },
     {
@@ -21,6 +26,11 @@ const Baichuan: ModelProviderCard = {
       functionCall: true,
       id: 'Baichuan3-Turbo',
       maxOutput: 8192,
+      pricing: {
+        currency: 'CNY',
+        input: 12,
+        output: 12,
+      },
       tokens: 32_768,
     },
     {
@@ -30,6 +40,11 @@ const Baichuan: ModelProviderCard = {
       enabled: true,
       id: 'Baichuan3-Turbo-128k',
       maxOutput: 4096,
+      pricing: {
+        currency: 'CNY',
+        input: 24,
+        output: 24,
+      },
       tokens: 128_000,
     },
     {
@@ -38,25 +53,24 @@ const Baichuan: ModelProviderCard = {
       displayName: 'Baichuan 2 Turbo',
       id: 'Baichuan2-Turbo',
       maxOutput: 8192,
+      pricing: {
+        currency: 'CNY',
+        input: 8,
+        output: 8,
+      },
       tokens: 32_768,
-    },
-    {
-      description:
-        '具备 192K 超长上下文窗口，采用搜索增强技术实现大模型与领域知识、全网知识的全面链接。支持PDF、Word等多种文档上传及网址输入，信息获取及时、全面，输出结果准确、专业。',
-      displayName: 'Baichuan 2 Turbo 192k',
-      id: 'Baichuan2-Turbo-192k',
-      maxOutput: 2048,
-      tokens: 192_000,
     },
   ],
   checkModel: 'Baichuan3-Turbo',
   id: 'baichuan',
   modelList: { showModelFetcher: true },
+  modelsUrl: 'https://platform.baichuan-ai.com/price',
   name: 'Baichuan',
   smoothing: {
     speed: 2,
     text: true,
   },
+  url: 'https://platform.baichuan-ai.com',
 };
 
 export default Baichuan;

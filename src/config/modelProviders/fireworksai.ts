@@ -139,7 +139,9 @@ const FireworksAI: ModelProviderCard = {
   checkModel: 'accounts/fireworks/models/firefunction-v2',
   id: 'fireworksai',
   modelList: { showModelFetcher: true },
+  modelsUrl: 'https://fireworks.ai/models?show=Serverless',
   name: 'Fireworks AI',
+  url: 'https://fireworks.ai',
 };
 
 export default FireworksAI;

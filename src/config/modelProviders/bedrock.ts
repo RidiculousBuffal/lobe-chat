@@ -1,6 +1,5 @@
 import { ModelProviderCard } from '@/types/llm';
 
-// ref https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html
 // ref https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html
 // ref https://us-east-1.console.aws.amazon.com/bedrock/home?region=us-east-1#/models
 // ref https://us-west-2.console.aws.amazon.com/bedrock/home?region=us-west-2#/models
@@ -34,6 +33,10 @@ const Bedrock: ModelProviderCard = {
       enabled: true,
       functionCall: true,
       id: 'anthropic.claude-3-5-sonnet-20240620-v1:0',
+      pricing: {
+        input: 3,
+        output: 15,
+      },
       tokens: 200_000,
       vision: true,
     },
@@ -44,6 +47,10 @@ const Bedrock: ModelProviderCard = {
       enabled: true,
       functionCall: true,
       id: 'anthropic.claude-3-sonnet-20240229-v1:0',
+      pricing: {
+        input: 3,
+        output: 15,
+      },
       tokens: 200_000,
       vision: true,
     },
@@ -54,6 +61,10 @@ const Bedrock: ModelProviderCard = {
       enabled: true,
       functionCall: true,
       id: 'anthropic.claude-3-opus-20240229-v1:0',
+      pricing: {
+        input: 15,
+        output: 75,
+      },
       tokens: 200_000,
       vision: true,
     },
@@ -64,6 +75,10 @@ const Bedrock: ModelProviderCard = {
       enabled: true,
       functionCall: true,
       id: 'anthropic.claude-3-haiku-20240307-v1:0',
+      pricing: {
+        input: 0.25,
+        output: 1.25,
+      },
       tokens: 200_000,
       vision: true,
     },
@@ -72,6 +87,10 @@ const Bedrock: ModelProviderCard = {
         'An update to Claude 2 that features double the context window, plus improvements across reliability, hallucination rates, and evidence-based accuracy in long document and RAG contexts.',
       displayName: 'Claude 2.1',
       id: 'anthropic.claude-v2:1',
+      pricing: {
+        input: 8,
+        output: 24,
+      },
       tokens: 200_000,
     },
     {
@@ -79,6 +98,10 @@ const Bedrock: ModelProviderCard = {
         'Anthropic highly capable model across a wide range of tasks from sophisticated dialogue and creative content generation to detailed instruction following.',
       displayName: 'Claude 2.0',
       id: 'anthropic.claude-v2',
+      pricing: {
+        input: 8,
+        output: 24,
+      },
       tokens: 100_000,
     },
     {
@@ -86,6 +109,10 @@ const Bedrock: ModelProviderCard = {
         'A fast, affordable yet still very capable model, which can handle a range of tasks including casual dialogue, text analysis, summarization, and document question-answering.',
       displayName: 'Claude Instant',
       id: 'anthropic.claude-instant-v1',
+      pricing: {
+        input: 0.8,
+        output: 2.4,
+      },
       tokens: 100_000,
     },
     {
@@ -95,6 +122,10 @@ const Bedrock: ModelProviderCard = {
       enabled: true,
       functionCall: true,
       id: 'meta.llama3-1-8b-instruct-v1:0',
+      pricing: {
+        input: 0.22,
+        output: 0.22,
+      },
       tokens: 128_000,
     },
     {
@@ -104,6 +135,10 @@ const Bedrock: ModelProviderCard = {
       enabled: true,
       functionCall: true,
       id: 'meta.llama3-1-70b-instruct-v1:0',
+      pricing: {
+        input: 0.99,
+        output: 0.99,
+      },
       tokens: 128_000,
     },
     {
@@ -113,6 +148,10 @@ const Bedrock: ModelProviderCard = {
       enabled: true,
       functionCall: true,
       id: 'meta.llama3-1-405b-instruct-v1:0',
+      pricing: {
+        input: 5.32,
+        output: 16,
+      },
       tokens: 128_000,
     },
     {
@@ -120,6 +159,10 @@ const Bedrock: ModelProviderCard = {
         'Meta Llama 3 is an accessible, open large language model (LLM) designed for developers, researchers, and businesses to build, experiment, and responsibly scale their generative AI ideas. Part of a foundational system, it serves as a bedrock for innovation in the global community. Ideal for limited computational power and resources, edge devices, and faster training times.',
       displayName: 'Llama 3 8B Instruct',
       id: 'meta.llama3-8b-instruct-v1:0',
+      pricing: {
+        input: 0.3,
+        output: 0.6,
+      },
       tokens: 8000,
     },
     {
@@ -127,6 +170,10 @@ const Bedrock: ModelProviderCard = {
         'Meta Llama 3 is an accessible, open large language model (LLM) designed for developers, researchers, and businesses to build, experiment, and responsibly scale their generative AI ideas. Part of a foundational system, it serves as a bedrock for innovation in the global community. Ideal for content creation, conversational AI, language understanding, R&D, and Enterprise applications.',
       displayName: 'Llama 3 70B Instruct',
       id: 'meta.llama3-70b-instruct-v1:0',
+      pricing: {
+        input: 2.65,
+        output: 3.5,
+      },
       tokens: 8000,
     },
     /*
@@ -230,7 +277,9 @@ const Bedrock: ModelProviderCard = {
   ],
   checkModel: 'anthropic.claude-instant-v1',
   id: 'bedrock',
+  modelsUrl: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html',
   name: 'Bedrock',
+  url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html',
 };
 
 export default Bedrock;
