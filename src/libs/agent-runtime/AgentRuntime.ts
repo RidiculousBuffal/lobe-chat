@@ -10,6 +10,7 @@ import { LobeBaichuanAI } from './baichuan';
 import { LobeBedrockAI, LobeBedrockAIParams } from './bedrock';
 import { LobeBingAI } from './bingai';
 import { LobeDeepSeekAI } from './deepseek';
+import { LobeFireworksAI } from './fireworksai';
 import { LobeGoogleAI } from './google';
 import { LobeGroq } from './groq';
 import { LobeMinimaxAI } from './minimax';
@@ -22,6 +23,7 @@ import { LobeOpenRouterAI } from './openrouter';
 import { LobePerplexityAI } from './perplexity';
 import { LobeQwenAI } from './qwen';
 import { LobeSiliconCloudAI } from './siliconcloud';
+import { LobeSparkAI } from './spark';
 import { LobeStepfunAI } from './stepfun';
 import { LobeTaichuAI } from './taichu';
 import { LobeTogetherAI } from './togetherai';
@@ -122,6 +124,7 @@ class AgentRuntime {
       bedrock: Partial<LobeBedrockAIParams>;
       bingai: Partial<ClientOptions>;
       deepseek: Partial<ClientOptions>;
+      fireworksai: Partial<ClientOptions>;
       google: { apiKey?: string; baseURL?: string };
       groq: Partial<ClientOptions>;
       minimax: Partial<ClientOptions>;
@@ -134,6 +137,7 @@ class AgentRuntime {
       perplexity: Partial<ClientOptions>;
       qwen: Partial<ClientOptions>;
       siliconcloud: Partial<ClientOptions>;
+      spark: Partial<ClientOptions>;
       stepfun: Partial<ClientOptions>;
       taichu: Partial<ClientOptions>;
       togetherai: Partial<ClientOptions>;
@@ -226,6 +230,11 @@ class AgentRuntime {
         break;
       }
 
+      case ModelProvider.FireworksAI: {
+        runtimeModel = new LobeFireworksAI(params.fireworksai);
+        break;
+      }
+
       case ModelProvider.ZeroOne: {
         runtimeModel = new LobeZeroOneAI(params.zeroone);
         break;
@@ -272,6 +281,11 @@ class AgentRuntime {
 
       case ModelProvider.Upstage: {
         runtimeModel = new LobeUpstageAI(params.upstage);
+        break;
+      }
+
+      case ModelProvider.Spark: {
+        runtimeModel = new LobeSparkAI(params.spark);
         break;
       }
     }
