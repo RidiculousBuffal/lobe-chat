@@ -59,6 +59,10 @@ const Spark: ModelProviderCard = {
   id: 'spark',
   modelList: { showModelFetcher: true },
   name: 'Spark',
+  smoothing: {
+    speed: 2,
+    text: true,
+  },
 };
 
 export default Spark;

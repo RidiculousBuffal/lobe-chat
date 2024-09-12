@@ -53,6 +53,10 @@ const Baichuan: ModelProviderCard = {
   id: 'baichuan',
   modelList: { showModelFetcher: true },
   name: 'Baichuan',
+  smoothing: {
+    speed: 2,
+    text: true,
+  },
 };
 
 export default Baichuan;
