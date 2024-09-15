@@ -19,8 +19,8 @@ const FullscreenLoading = memo<{ title?: string }>(({ title }) => {
           src={logoUrl}
           width={120} // 动态计算宽度
         />
-        <Center gap={16} horizontal>
-          <Icon icon={Loader2} spin />
+        <Center gap={12} horizontal style={{ fontSize: 15, lineHeight: 1.5, opacity: 0.66 }}>
+          <Icon icon={Loader2} size={{ fontSize: 16 }} spin />
           {title}
         </Center>
       </Center>
