@@ -22,6 +22,7 @@ export interface CreateChatCompletionOptions {
 }
 
 export enum ModelProvider {
+  Ai21 = 'ai21',
   Ai360 = 'ai360',
   Anthropic = 'anthropic',
   Azure = 'azure',
@@ -30,6 +31,7 @@ export enum ModelProvider {
   Bingai = 'bingai',
   DeepSeek = 'deepseek',
   FireworksAI = 'fireworksai',
+  Github = 'github',
   Google = 'google',
   Groq = 'groq',
   Minimax = 'minimax',

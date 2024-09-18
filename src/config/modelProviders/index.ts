@@ -1,5 +1,6 @@
 import { ChatModelCard, ModelProviderCard } from '@/types/llm';
 
+import Ai21Provider from './ai21';
 import Ai360Provider from './ai360';
 import AnthropicProvider from './anthropic';
 import AzureProvider from './azure';
@@ -8,6 +9,7 @@ import BedrockProvider from './bedrock';
 import BingaiProvider from './bingai';
 import DeepSeekProvider from './deepseek';
 import FireworksAIProvider from './fireworksai';
+import GithubProvider from './github';
 import GoogleProvider from './google';
 import GroqProvider from './groq';
 import MinimaxProvider from './minimax';
@@ -36,6 +38,7 @@ export const LOBE_DEFAULT_MODEL_LIST: ChatModelCard[] = [
   DeepSeekProvider.chatModels,
   GoogleProvider.chatModels,
   GroqProvider.chatModels,
+  GithubProvider.chatModels,
   MinimaxProvider.chatModels,
   MistralProvider.chatModels,
   MoonshotProvider.chatModels,
@@ -54,6 +57,7 @@ export const LOBE_DEFAULT_MODEL_LIST: ChatModelCard[] = [
   SiliconCloudProvider.chatModels,
   UpstageProvider.chatModels,
   SparkProvider.chatModels,
+  Ai21Provider.chatModels,
 ].flat();
 
 export const DEFAULT_MODEL_PROVIDER_LIST = [
@@ -65,6 +69,7 @@ export const DEFAULT_MODEL_PROVIDER_LIST = [
   GoogleProvider,
   DeepSeekProvider,
   OpenRouterProvider,
+  GithubProvider,
   GroqProvider,
   NovitaProvider,
   PerplexityProvider,
@@ -72,6 +77,7 @@ export const DEFAULT_MODEL_PROVIDER_LIST = [
   TogetherAIProvider,
   FireworksAIProvider,
   UpstageProvider,
+  Ai21Provider,
   QwenProvider,
   SparkProvider,
   ZhiPuProvider,
@@ -96,6 +102,7 @@ export const isProviderDisableBroswerRequest = (id: string) => {
   return !!provider;
 };
 
+export { default as Ai21ProviderCard } from './ai21';
 export { default as Ai360ProviderCard } from './ai360';
 export { default as AnthropicProviderCard } from './anthropic';
 export { default as AzureProviderCard } from './azure';
@@ -104,6 +111,7 @@ export { default as BedrockProviderCard } from './bedrock';
 export { default as BingaiProviderCard } from './bingai';
 export { default as DeepSeekProviderCard } from './deepseek';
 export { default as FireworksAIProviderCard } from './fireworksai';
+export { default as GithubProviderCard } from './github';
 export { default as GoogleProviderCard } from './google';
 export { default as GroqProviderCard } from './groq';
 export { default as MinimaxProviderCard } from './minimax';

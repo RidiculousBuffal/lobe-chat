@@ -17,6 +17,7 @@ export interface AWSBedrockKeyVault {
 }
 
 export interface UserKeyVaults {
+  ai21?: OpenAICompatibleKeyVault;
   ai360?: OpenAICompatibleKeyVault;
   anthropic?: OpenAICompatibleKeyVault;
   azure?: AzureOpenAIKeyVault;
@@ -25,6 +26,7 @@ export interface UserKeyVaults {
   bingai?: OpenAICompatibleKeyVault;
   deepseek?: OpenAICompatibleKeyVault;
   fireworksai?: OpenAICompatibleKeyVault;
+  github?: OpenAICompatibleKeyVault;
   google?: OpenAICompatibleKeyVault;
   groq?: OpenAICompatibleKeyVault;
   lobehub?: any;

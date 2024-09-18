@@ -1,4 +1,5 @@
 import {
+  Ai21ProviderCard,
   Ai360ProviderCard,
   AnthropicProviderCard,
   BaichuanProviderCard,
@@ -6,6 +7,7 @@ import {
   BingaiProviderCard,
   DeepSeekProviderCard,
   FireworksAIProviderCard,
+  GithubProviderCard,
   GoogleProviderCard,
   GroqProviderCard,
   MinimaxProviderCard,
@@ -31,6 +33,10 @@ import { ModelProvider } from '@/libs/agent-runtime';
 import { UserModelProviderConfig } from '@/types/user/settings';
 
 export const DEFAULT_LLM_CONFIG: UserModelProviderConfig = {
+  ai21: {
+    enabled: false,
+    enabledModels: filterEnabledModels(Ai21ProviderCard),
+  },
   ai360: {
     enabled: false,
     enabledModels: filterEnabledModels(Ai360ProviderCard),
@@ -61,6 +67,10 @@ export const DEFAULT_LLM_CONFIG: UserModelProviderConfig = {
   fireworksai: {
     enabled: false,
     enabledModels: filterEnabledModels(FireworksAIProviderCard),
+  },
+  github: {
+    enabled: false,
+    enabledModels: filterEnabledModels(GithubProviderCard),
   },
   google: {
     enabled: false,
