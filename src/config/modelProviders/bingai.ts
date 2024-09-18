@@ -45,5 +45,6 @@ const BingAI: ModelProviderCard = {
   proxyUrl: {
     placeholder: 'https://api.oneabc.org/v1',
   },
+  url: 'https://bing.com',
 };
 export default BingAI;
