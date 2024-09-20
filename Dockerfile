@@ -1,22 +1,33 @@
 ## Base image for all the stages
-FROM node:20-alpine AS base
-ARG APP_URL="https://cathaybot.zeabur.app"
+## Base image for all the stages
+FROM node:20-slim AS base
+
 ARG USE_CN_MIRROR
+
+ENV DEBIAN_FRONTEND="noninteractive"
+ARG APP_URL="https://cathaybot.zeabur.app"
 ARG NEXT_PUBLIC_S3_DOMAIN="https://hpcow-1316827225.cos.ap-shanghai.myqcloud.com"
 RUN \
     # If you want to build docker in China, build with --build-arg USE_CN_MIRROR=true
     if [ "${USE_CN_MIRROR:-false}" = "true" ]; then \
-        sed -i "s/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g" "/etc/apk/repositories"; \
+        sed -i "s/deb.debian.org/mirrors.ustc.edu.cn/g" "/etc/apt/sources.list.d/debian.sources"; \
     fi \
     # Add required package & update base package
-    && apk update \
-    && apk add --no-cache bind-tools proxychains-ng \
-    && apk upgrade --no-cache \
-    # Add user nextjs to run the app
+    && apt update \
+    && apt install busybox proxychains-ng -qy \
+    && apt full-upgrade -qy \
+    && apt autoremove -qy --purge \
+    && apt clean -qy \
+    # Configure BusyBox
+    && busybox --install -s \
+    # Add nextjs:nodejs to run the app
     && addgroup --system --gid 1001 nodejs \
-    && adduser --system --uid 1001 nextjs \
-    && chown -R nextjs:nodejs "/etc/proxychains" \
-    && rm -rf /tmp/* /var/cache/apk/*
+    && adduser --system --home "/app" --gid 1001 -uid 1001 nextjs \
+    # Set permission for nextjs:nodejs
+    && chown -R nextjs:nodejs "/etc/proxychains4.conf" \
+    # Cleanup temp files
+    && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+
 
 ## Builder image, install all the dependencies and build the app
 FROM base AS builder
@@ -125,12 +136,12 @@ ENV KEY_VAULTS_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
 ENV NEXT_AUTH_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
 NEXTAUTH_URL="https://cathaybot.zeabur.app/api/auth" \
 NEXT_AUTH_SSO_PROVIDERS="azure-ad,auth0" \
-AZURE_AD_CLIENT_ID="b315490a-0e57-4f66-b6ea-6c980bdf8907" \
-AZURE_AD_CLIENT_SECRET="Z318Q~X83TYmXEXy~OjgPGEZao5OK3qZfYshKb2X" \
-AZURE_AD_TENANT_ID="52fc6378-ecb3-42d1-b528-6111ae133fc1" \
-AUTH0_CLIENT_ID="x2TAhrOpb9iEe7OqWQsaM9oNzZ63dNHQ" \
-AUTH0_CLIENT_SECRET="WzsSkh26QKJj0G-or9vxvDGwHd4DjKzIXlzxpIgL6_mf8_qaopFscFXZFWzKzcjE" \
-AUTH0_ISSUER="https://dev-itiifj0yxxduxhom.us.auth0.com" \
+AUTH_AZURE_AD_ID="b315490a-0e57-4f66-b6ea-6c980bdf8907" \
+AUTH_AZURE_AD_SECRET="Z318Q~X83TYmXEXy~OjgPGEZao5OK3qZfYshKb2X" \
+AUTH_AZURE_AD_TENANT_ID="52fc6378-ecb3-42d1-b528-6111ae133fc1" \
+AUTH_AUTH0_ID="x2TAhrOpb9iEe7OqWQsaM9oNzZ63dNHQ" \
+AUTH_AUTH0_SECRET="WzsSkh26QKJj0G-or9vxvDGwHd4DjKzIXlzxpIgL6_mf8_qaopFscFXZFWzKzcjE" \
+AUTH_AUTH0_ISSUER="https://dev-itiifj0yxxduxhom.us.auth0.com" \
 ACCESS_CODE="Cathay123456"
 
 # S3
@@ -241,15 +252,7 @@ CMD \
             'tcp_read_time_out 15000' \
             '[ProxyList]' \
             "$protocol $host $port" \
-        > "/etc/proxychains/proxychains.conf"; \
-    fi; \
-    # Fix DNS resolving issue in Docker Compose, ref https://github.com/lobehub/lobe-chat/pull/3837
-    if [ -f "/etc/resolv.conf" ]; then \
-        sudo chmod 666 "/etc/resolv.conf"; \
-        resolv_conf=$(grep '^nameserver' "/etc/resolv.conf" | awk '{print "nameserver " $2}'); \
-        printf "%s\n" \
-            "$resolv_conf" \
-        > "/etc/resolv.conf"; \
+        > "/etc/proxychains4.conf"; \
     fi; \
     # Run migration
     node "/app/docker.cjs"; \
