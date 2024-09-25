@@ -71,8 +71,8 @@ export const useProviderList = (): ProviderItem[] => {
       BaichuanProviderCard,
       MinimaxProviderCard,
       Ai360ProviderCard,
-      SiliconCloudProviderCard,
       TaichuProviderCard,
+      SiliconCloudProviderCard,
     ],
     [AzureProvider, OllamaProvider, OpenAIProvider, BedrockProvider, GithubProvider],
   );
