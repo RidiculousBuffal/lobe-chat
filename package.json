@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/chat",
-  "version": "1.20.5",
+  "version": "1.20.8",
   "description": "Lobe Chat - an open-source, high-performance chatbot framework that supports speech synthesis, multimodal, and extensible Function Call plugin system. Supports one-click free deployment of your private ChatGPT/LLM web application.",
   "keywords": [
     "framework",
@@ -54,7 +54,7 @@
     "release": "semantic-release",
     "self-hosting:docker": "docker build -t lobe-chat:local .",
     "self-hosting:docker-cn": "docker build -t lobe-chat-local --build-arg USE_CN_MIRROR=true .",
-    "self-hosting:docker-cn@database": "docker build -t lobe-chat-database-local -f Dockerfile --build-arg USE_CN_MIRROR=true .",
+    "self-hosting:docker-cn@database": "docker build -t lobe-chat-database-local -f Dockerfile.database --build-arg USE_CN_MIRROR=true .",
     "start": "next start -p 3210",
     "stylelint": "stylelint \"src/**/*.{js,jsx,ts,tsx}\" --fix",
     "test": "npm run test-app && npm run test-server",
@@ -209,7 +209,7 @@
     "rtl-detect": "^1.1.2",
     "semver": "^7.6.3",
     "sharp": "^0.33.5",
-    "shiki": "1.17.7",
+    "shiki": "^1.21.0",
     "stripe": "^15.8.0",
     "superjson": "^2.2.1",
     "svix": "^1.30.0",
