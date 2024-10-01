@@ -1,6 +1,5 @@
 const dns = require('node:dns').promises;
 const fs = require('node:fs').promises;
-const tls = require('node:tls');
 const { spawn } = require('node:child_process');
 
 // Set file paths
@@ -10,8 +9,7 @@ const PROXYCHAINS_CONF_PATH = '/etc/proxychains4.conf';
 
 // Function to check if a string is a valid IP address
 const isValidIP = (ip, version = 4) => {
-  const ipv4Regex =
-    /^(25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3}$/;
+  const ipv4Regex = /^(25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3}$/;
   const ipv6Regex =
     /^(([\da-f]{1,4}:){7}[\da-f]{1,4}|([\da-f]{1,4}:){1,7}:|([\da-f]{1,4}:){1,6}:[\da-f]{1,4}|([\da-f]{1,4}:){1,5}(:[\da-f]{1,4}){1,2}|([\da-f]{1,4}:){1,4}(:[\da-f]{1,4}){1,3}|([\da-f]{1,4}:){1,3}(:[\da-f]{1,4}){1,4}|([\da-f]{1,4}:){1,2}(:[\da-f]{1,4}){1,5}|[\da-f]{1,4}:((:[\da-f]{1,4}){1,6})|:((:[\da-f]{1,4}){1,7}|:)|fe80:(:[\da-f]{0,4}){0,4}%[\da-z]+|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}\d){0,1}\d)\.){3}(25[0-5]|(2[0-4]|1{0,1}\d){0,1}\d)|([\da-f]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}\d){0,1}\d)\.){3}(25[0-5]|(2[0-4]|1{0,1}\d){0,1}\d))$/;
 
@@ -26,77 +24,6 @@ const isValidIP = (ip, version = 4) => {
       return ipv4Regex.test(ip) || ipv6Regex.test(ip);
     }
   }
-};
-
-// Function to check TLS validity of a URL
-const isValidTLS = (url = '') => {
-  if (!url) {
-    console.log('⚠️ TLS Check: No URL provided. Skipping TLS check. Ensure correct setting ENV.');
-    console.log('-------------------------------------');
-    return Promise.resolve();
-  }
-
-  const { protocol, host, port } = parseUrl(url);
-  if (protocol !== 'https') {
-    console.log(`⚠️ TLS Check: Non-HTTPS protocol (${protocol}). Skipping TLS check for ${url}.`);
-    console.log('-------------------------------------');
-    return Promise.resolve();
-  }
-
-  const options = { host, port, servername: host };
-  return new Promise((resolve, reject) => {
-    const socket = tls.connect(options, () => {
-      console.log(`✅ TLS Check: Valid certificate for ${host}:${port}.`);
-      console.log('-------------------------------------');
-
-      socket.end();
-
-      resolve();
-    });
-
-    socket.on('error', (err) => {
-      const errMsg = `❌ TLS Check: Error for ${host}:${port}. Details:`;
-      switch (err.code) {
-        case 'CERT_HAS_EXPIRED':
-        case 'DEPTH_ZERO_SELF_SIGNED_CERT':
-        case 'ERR_TLS_CERT_ALTNAME_INVALID': {
-          console.error(
-            `${errMsg} Certificate is not valid. Consider setting NODE_TLS_REJECT_UNAUTHORIZED="0" or mapping /etc/ssl/certs/ca-certificates.crt.`,
-          );
-          break;
-        }
-        case 'UNABLE_TO_GET_ISSUER_CERT_LOCALLY': {
-          console.error(
-            `${errMsg} Unable to verify issuer. Ensure correct mapping of /etc/ssl/certs/ca-certificates.crt.`,
-          );
-          break;
-        }
-        default: {
-          console.error(`${errMsg} Network issue. Check firewall or DNS.`);
-          break;
-        }
-      }
-      reject(err);
-    });
-  });
-};
-
-// Function to check TLS connections for OSS and Auth Issuer
-const checkTLSConnections = async () => {
-  await Promise.all([
-    isValidTLS(process.env.S3_ENDPOINT),
-    isValidTLS(process.env.S3_PUBLIC_DOMAIN),
-    isValidTLS(getEnvVarsByKeyword('_ISSUER')),
-  ]);
-};
-
-// Function to get environment variable by keyword
-const getEnvVarsByKeyword = (keyword) => {
-  return (
-    Object.entries(process.env)
-      .filter(([key, value]) => key.includes(keyword) && value)
-      .map(([, value]) => value)[0] || null
-  );
 };
 
 // Function to parse protocol, host and port from a URL
@@ -130,7 +57,7 @@ const resolveHostIP = async (host, version = 4) => {
 // Function to generate proxychains configuration
 const runProxyChainsConfGenerator = async (url) => {
   const { protocol, host, port } = parseUrl(url);
-  // eslint-disable-next-line unicorn/no-process-exit
+
   if (!['http', 'socks4', 'socks5'].includes(protocol)) {
     console.error(
       `❌ ProxyChains: Invalid protocol (${protocol}). Protocol must be 'http', 'socks4' and 'socks5'.`,
@@ -138,7 +65,7 @@ const runProxyChainsConfGenerator = async (url) => {
     // eslint-disable-next-line unicorn/no-process-exit
     process.exit(1);
   }
-  // eslint-disable-next-line unicorn/no-process-exit
+
   const validPort = parseInt(port, 10);
   if (isNaN(validPort) || validPort <= 0 || validPort > 65_535) {
     console.error(
@@ -147,7 +74,7 @@ const runProxyChainsConfGenerator = async (url) => {
     // eslint-disable-next-line unicorn/no-process-exit
     process.exit(1);
   }
-  // eslint-disable-next-line unicorn/no-process-exit
+
   let ip = isValidIP(host, 4) ? host : await resolveHostIP(host, 4);
 
   const configContent = `
@@ -189,9 +116,7 @@ const runServer = async () => {
     return runScript(SERVER_SCRIPT_PATH, true);
   }
   return runScript(SERVER_SCRIPT_PATH);
-};
-
-// Main execution block
+}; // Main execution block
 // eslint-disable-next-line unicorn/prefer-top-level-await
 (async () => {
   console.log('🌐 DNS Server:', dns.getServers());
@@ -199,30 +124,21 @@ const runServer = async () => {
 
   if (process.env.DATABASE_DRIVER) {
     try {
-      try {
-        await fs.access(DB_MIGRATION_SCRIPT_PATH);
+      await fs.access(DB_MIGRATION_SCRIPT_PATH);
 
-        await runScript(DB_MIGRATION_SCRIPT_PATH);
-      } catch (err) {
-        if (err.code === 'ENOENT') {
-          console.log(
-            `⚠️ DB Migration: Not found ${DB_MIGRATION_SCRIPT_PATH}. Skipping DB migration. Ensure to migrate database manually.`,
-          );
-          console.log('-------------------------------------');
-        } else {
-          console.error('❌ Error during DB migration:');
-          console.error(err);
-          // eslint-disable-next-line unicorn/no-process-exit
-          process.exit(1);
-        }
-      }
-
-      await checkTLSConnections();
+      await runScript(DB_MIGRATION_SCRIPT_PATH);
     } catch (err) {
-      console.error('❌ Error during TLS connection check:');
-      console.error(err);
-      // eslint-disable-next-line unicorn/no-process-exit
-      process.exit(1);
+      if (err.code === 'ENOENT') {
+        console.log(
+          `⚠️ DB Migration: Not found ${DB_MIGRATION_SCRIPT_PATH}. Skipping DB migration. Ensure to migrate database manually.`,
+        );
+        console.log('-------------------------------------');
+      } else {
+        console.error('❌ Error during DB migration:');
+        console.error(err);
+        // eslint-disable-next-line unicorn/no-process-exit
+        process.exit(1);
+      }
     }
   }
 
