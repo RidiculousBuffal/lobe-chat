@@ -149,31 +149,31 @@ ENV KEY_VAULTS_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
     DATABASE_URL="postgresql://root:nBv2W84zOiw1p7AXoLyS5lDH0x39chY6@sfo1.clusters.zeabur.com:32198/zeabur"
 
 # Next Auth
-ENV NEXT_AUTH_SECRET="+HhuXdu0C5NhMcYNIOxf91kJPHZKvzZnryy9lwvMnBE=" \
-NEXTAUTH_URL="https://cathaybot.zeabur.app/api/auth" \
-NEXT_AUTH_SSO_PROVIDERS="azure-ad,auth0" \
-AUTH_AZURE_AD_ID="b315490a-0e57-4f66-b6ea-6c980bdf8907" \
-AUTH_AZURE_AD_SECRET="Z318Q~X83TYmXEXy~OjgPGEZao5OK3qZfYshKb2X" \
-AUTH_AZURE_AD_TENANT_ID="52fc6378-ecb3-42d1-b528-6111ae133fc1" \
-AUTH_AUTH0_ID="x2TAhrOpb9iEe7OqWQsaM9oNzZ63dNHQ" \
-AUTH_AUTH0_SECRET="WzsSkh26QKJj0G-or9vxvDGwHd4DjKzIXlzxpIgL6_mf8_qaopFscFXZFWzKzcjE" \
-AUTH_AUTH0_ISSUER="https://dev-itiifj0yxxduxhom.us.auth0.com" \
-ACCESS_CODE="Cathay123456"
+ENV NEXT_AUTH_SECRET="" \
+NEXTAUTH_URL="" \
+NEXT_AUTH_SSO_PROVIDERS="" \
+AUTH_AZURE_AD_ID="" \
+AUTH_AZURE_AD_SECRET="" \
+AUTH_AZURE_AD_TENANT_ID="" \
+AUTH_AUTH0_ID="" \
+AUTH_AUTH0_SECRET="" \
+AUTH_AUTH0_ISSUER="" \
+ACCESS_CODE=""
 
 # S3
-ENV S3_ACCESS_KEY_ID="AKIDhJ1qeVQcsoopsqsrmdPJCyeNC84wlhku" \
-    S3_SECRET_ACCESS_KEY="AQemXC2qYCoT8sY2IMH3cxEKYdgbK0Yz" \
+ENV S3_ACCESS_KEY_ID="" \
+    S3_SECRET_ACCESS_KEY="" \
     NEXT_PUBLIC_S3_DOMAIN=${NEXT_PUBLIC_S3_DOMAIN} \
-    S3_ENDPOINT="https://cos.ap-shanghai.myqcloud.com" \
-    S3_BUCKET="hpcow-1316827225" \
-    ACCESS_CODE="Cathay123456" \
+    S3_ENDPOINT="" \
+    S3_BUCKET="" \
+    ACCESS_CODE="" \
     S3_PUBLIC_DOMAIN=${NEXT_PUBLIC_S3_DOMAIN}
 
 
 # unstructured IO
 
-ENV  UNSTRUCTURED_API_KEY="cHSLrbZzLKOihkgi4DUvsDIBsrsL0F" \
-     UNSTRUCTURED_SERVER_URL="https://api.unstructuredapp.io/general/v0/general"
+ENV  UNSTRUCTURED_API_KEY="" \
+     UNSTRUCTURED_SERVER_URL=""
 
 
 # Model Variables
@@ -187,7 +187,7 @@ ENV \
     # Amazon Bedrock
     AWS_ACCESS_KEY_ID="" AWS_SECRET_ACCESS_KEY="" AWS_REGION="" AWS_BEDROCK_MODEL_LIST="" \
     # Azure OpenAI
-    AZURE_API_KEY="876571fe014c4230947dfb743314ee8e" AZURE_API_VERSION="2024-05-01-preview" AZURE_ENDPOINT="https://cathaywestus.openai.azure.com" AZURE_MODEL_LIST="gpt-35-turbo->gpt-35-turbo=gpt-35-turbo" \
+    AZURE_API_KEY="" AZURE_API_VERSION="" AZURE_ENDPOINT="" AZURE_MODEL_LIST="" \
     # Baichuan
     BAICHUAN_API_KEY="" \
     # DeepSeek
@@ -211,7 +211,7 @@ ENV \
     # Ollama
     OLLAMA_MODEL_LIST="" OLLAMA_PROXY_URL="" \
     # OpenAI
-    OPENAI_API_KEY="sk-6O3WQK3NVhv2Dec4F4B7026eA28443C4906b3cC0A2CbE0Fe" OPENAI_MODEL_LIST="+gpt-4o=gpt-4o<1280000:fc:vision>,+gpt-4o-mini=<1280000:fc:vision>,+gpt-4-turbo-2024-04-09=<1280000:fc:vision>,gpt-4-all=ChatGPT Plus<128000:fc:vision:file>" OPENAI_PROXY_URL="https://aihubmix.com/v1" \
+    OPENAI_API_KEY="" OPENAI_MODEL_LIST="" OPENAI_PROXY_URL="https://aihubmix.com/v1" \
     # OpenRouter
     OPENROUTER_API_KEY="" OPENROUTER_MODEL_LIST="" \
     # Perplexity
@@ -235,7 +235,7 @@ ENV \
     # Zhipu
     ZHIPU_API_KEY="" \
     #Bingai
-    BINGAI_API_KEY="sk-sxs1OsIBdzH8OqgdDc03C8D8E15545E58f002b09747b0645" BINGAI_PROXY_URL="https://api.oneabc.org/v1"
+    BINGAI_API_KEY="" BINGAI_PROXY_URL=""
 
 USER nextjs
 
